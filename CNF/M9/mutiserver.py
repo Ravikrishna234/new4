@@ -17,7 +17,7 @@ def Main():
         x = int(random.randint(0,50))
         print(x)
         print(start_new_thread(clientsThread,(c,x)))
-def clientsThread(c,x):
+def clientsThread(c):
     count =  int(0)
     value = int(0)
     while True:
@@ -39,6 +39,7 @@ def clientsThread(c,x):
         elif (value > x):
             x1 = "Think smaller"
             c.send(str(x1).encode())
+
 
     # print("Connected")
     c.close()

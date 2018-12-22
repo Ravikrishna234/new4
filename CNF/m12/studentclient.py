@@ -27,6 +27,8 @@ if __name__ == "__main__":
     s.send(uname.encode('ascii'))
     msg1 = s.recv(1024).decode('ascii')
     print(msg1)
+    msg3 = s.recv(1024).decode('ascii')
+    print(msg3)
     client = True
     # receivemsg(s)
     threading.Thread(target = receivemsg, args = (s,)).start()

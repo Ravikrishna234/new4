@@ -18,12 +18,16 @@ def handlestudents(client,rollno):
                 client.send(message1[0].encode('ascii'))
         # message = client.recv(1024).decode('ascii')
     if count == 1:
-        clientrun = True
+        clientrun = False
         ans = client.recv(1024).decode('ascii')
-        if clientrun:
+        if not clientrun:
             for answer in values:
                 if(ans in answer):
                     client.send("ATTENDANCE AWARDED".encode('ascii'))
+                    clientrun = True
+                elif(not clientrun):
+                    client.send("No ATTENDANCE".encode('ascii'))
+                    clientrun = True
         else:
             client.send("No person found".encode('ascii'))
 if __name__ == '__main__':
@@ -51,6 +55,11 @@ if __name__ == '__main__':
         print("Connected to the server" + str(rollno))
         client.send("Welcome to class".encode('ascii'))
         if(client not in clients):
-            clients[rollno] = client
+            if(client in students):
+                clients[rollno] = client
             # handlestudents(client,rollno)
-            threading.Thread(target = handlestudents, args = (client,rollno,)).start()
+                threading.Thread(target = handlestudents, args = (client,rollno,)).start()
+                client.send("Roll Number Found".encode('ascii'))
+            else:
+                client.send("No rollnumber found".encode('ascii'))
+                break

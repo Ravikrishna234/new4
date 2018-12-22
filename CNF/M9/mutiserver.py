@@ -2,7 +2,7 @@ import socket
 import threading
 import random
 import time
-from threading import *
+from _thread import *
 def Main():
     host = '10.10.9.105'
     port = 5001
@@ -17,7 +17,7 @@ def Main():
         x = int(random.randint(0,50))
         print(x)
         print(start_new_thread(clientsThread,(c,x)))
-def clientsThread(c):
+def clientsThread(c,x):
     count =  int(0)
     value = int(0)
     while True:

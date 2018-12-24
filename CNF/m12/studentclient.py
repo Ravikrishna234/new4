@@ -9,12 +9,16 @@ def receivemsg(sock):
         print(msg)
         inp = input()
         msg2 = sock.send(str(inp).encode('ascii'))
+        message1 = ""
         message1 = sock.recv(1024).decode('ascii')
         message = message1.split()
+        print(message)
         if(message[0] == "ATTENDANCE"):
             print("ATTENDANCE AWARDED")
+            break
         else:
             print("No attendance")
+            break
         # except:
             # print('Server is Down. You are now Disconnected. Press enter to exit...')
             # serverDown = True
